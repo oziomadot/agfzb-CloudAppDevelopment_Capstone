@@ -17,12 +17,39 @@
         <nav class="navbar navbar-light bg-light">
             <div class="container-fluid">
                 <div class="navbar-header">
+                <a class="navbar-brand" href="#">Dealership Review</a>
+            </div>
+                
+                    <div class="nav navbar-nav navbar-right">
                       <a class="navbar-brand" href="{% url 'djangoapp:about'%}">About</a>
                 </div>
-                <div class="navbar-header">
+                <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{% url 'djangoapp:contact' %}">Contact</a>
               </div>
-
+              
+                {% if user.is_authenticated %}
+                <div class="rightalign">
+                    <div class="dropdown">
+                        <button class="dropbtn">{{user.first_name}}</button>
+                        <div class="dropdown-content">
+                            <a href="{% url 'djangoapp:logout' %}">Logout</a>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="rightalign">
+                    <div class="dropdown">
+                        <form action="{% url 'djangoapp:registration' %}" method="get">
+                            <input class="dropbtn"  type="submit" value="Visitor">
+                            <div class="dropdown-content">
+                                <a href="{% url 'djangoapp:registration' %}">Signup</a>
+                                <a href="{% url 'djangoapp:login' %}">Login</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                {% endif %}
+            
 
                
             </div>
